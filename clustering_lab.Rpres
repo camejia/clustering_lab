@@ -1,0 +1,82 @@
+Clustering Laboratory
+========================================================
+author: Christopher A. Mejia
+date: 24 May 2015
+transition: concave
+
+Motivation
+========================================================
+
+<small>
+K-Means Clustering:
+- Is an important tool in Data Science
+- Is taught as part of the Exploratory Data Analysis class in the Coursera Data Science Specialization
+- Allows the Data Scientist to discover groupings in data
+ 
+Example: Clustering integers from 1 to 10 results in two groupings:
+
+```{r}
+kmeans(seq(1, 10), 2)$cluster
+```
+Unfortunately, text input and output is not very informative.
+Better graphical learning aids for K-Means Clustering are needed to teach budding Data Scientists how to use this powerful technique.
+</small>
+
+Sample Output
+========================================================
+
+The Clustering Laboratory is an interactive Shiny application that allows the Data Scientist to simulate a numbers of clusters and experiment with fitting a (possibly different) number of clusters to the data.  A sample output plot is shown here:
+
+***
+
+```{r, echo = FALSE}
+nClustersSimulate <- 5
+
+kClustersPartition <- 5
+
+nPoints <- 60  # divisible up to 6
+# nPointsPerClusterSimulated <- nPoints / nClustersSimulate
+
+xOff <- rnorm(nPoints, mean = 0, sd = 0.05)
+yOff <- rnorm(nPoints, mean = 0, sd = 0.05)
+
+xCtr <- runif(nClustersSimulate)
+yCtr <- runif(nClustersSimulate)
+
+clusterIdSimulated <- seq(1, nClustersSimulate)
+
+clusteredData <- data.frame(x = xOff + rep(xCtr), y = yOff + rep(yCtr),
+                            clusterIdSimulated)
+
+clusteredData$x[clusteredData$x < 0] <- 0
+clusteredData$x[clusteredData$y < 0] <- 0
+clusteredData$x[clusteredData$x > 1] <- 1
+clusteredData$y[clusteredData$y > 1] <- 1
+
+fit <- kmeans(clusteredData[, c("x", "y")], kClustersPartition)
+clusteredData$clusterIdFit <- factor(fit$cluster)
+clusteredData$clusterIdSimulated <- factor(clusteredData$clusterIdSimulated)
+
+library(ggplot2)
+
+ggplot(clusteredData, aes(x, y)) +
+  aes(shape = clusterIdSimulated) +
+  geom_point(aes(colour = clusterIdFit), size = 4) +
+  ggtitle("Clustered Data") +
+  xlim(-0.1, 1.1) + ylim(-0.1, 1.1)
+```
+
+Comparing the Clustering Laboratory to Similar Tools
+========================================================
+
+The Clustering Laboratory is similar to (and in fact was inspired by) an K-Means Lab presentented in the edX/MITx course 6.002x "Introduction to Computational Thinking and Data Science".  However, the Clustering Laboratory is superior to the edX K-Means Lab for the following reasons:
+
+- The edX K-Means Lab was used as part of a course on Python, whereas the Clustering Laboratory is implemented in R.  It is a well-known fact that R is the one true language for Data Science.
+- The Clustering Laboratory is deployed using Shiny, whereas the edX tool is deployed using something else (i.e. something that is not as shiny)
+
+Summary
+========================================================
+
+- K-Means Clustering is an important tool in Data Science
+- The Clustering Laboratory is an effective tool for teaching K-Means Clustering
+- Head over to RPubs and check out the [Clustering Laboratory](http://example.com) today!
