@@ -11,13 +11,14 @@
 # Generate new data
 # Run the algorithm
 
-
 nClustersSimulate <- 5
 
 kClustersPartition <- 5
 
 nPoints <- 60  # divisible up to 6
 # nPointsPerClusterSimulated <- nPoints / nClustersSimulate
+
+set.seed(2)
 
 xOff <- rnorm(nPoints, mean = 0, sd = 0.05)
 yOff <- rnorm(nPoints, mean = 0, sd = 0.05)
@@ -31,7 +32,7 @@ clusteredData <- data.frame(x = xOff + rep(xCtr), y = yOff + rep(yCtr),
                             clusterIdSimulated)
 
 clusteredData$x[clusteredData$x < 0] <- 0
-clusteredData$x[clusteredData$y < 0] <- 0
+clusteredData$y[clusteredData$y < 0] <- 0
 clusteredData$x[clusteredData$x > 1] <- 1
 clusteredData$y[clusteredData$y > 1] <- 1
 
@@ -40,9 +41,18 @@ clusteredData$clusterIdFit <- factor(fit$cluster)
 clusteredData$clusterIdSimulated <- factor(clusteredData$clusterIdSimulated)
 
 library(ggplot2)
+library(deldir)
+voronoi <- deldir(fit$centers[, 1], fit$centers[, 2])
 
-ggplot(clusteredData, aes(x, y)) +
-  aes(shape = clusterIdSimulated) +
-  geom_point(aes(colour = clusterIdFit), size = 4) +
+ggplot() +
+  # Plot the points
+  geom_point(data = clusteredData,
+             aes(x = x, y = y,
+                 shape = clusterIdSimulated,
+                 colour = clusterIdFit),
+             size = 4) +
+  # Plot the voronoi lines
+  geom_segment(data = voronoi$dirsgs,
+               aes(x = x1, y = y1, xend = x2, yend = y2)) +
   ggtitle("Clustered Data") +
   xlim(-0.1, 1.1) + ylim(-0.1, 1.1)

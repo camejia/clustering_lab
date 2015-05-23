@@ -1,8 +1,8 @@
 Clustering Laboratory
 ========================================================
 author: Christopher A. Mejia
-date: 24 May 2015
-transition: concave
+date: Sat May 23 11:46:30 2015
+transition: rotate
 
 Motivation
 ========================================================
@@ -21,7 +21,7 @@ kmeans(seq(1, 10), 2)$cluster
 ```
 
 ```
- [1] 1 1 1 1 1 2 2 2 2 2
+ [1] 2 2 2 2 2 1 1 1 1 1
 ```
 Unfortunately, text input and output is not very informative.
 Better graphical learning aids for K-Means Clustering are needed to teach budding Data Scientists how to use this powerful technique.
@@ -38,6 +38,7 @@ The Clustering Laboratory is an interactive Shiny application that allows the Da
 
 Comparing the Clustering Laboratory to Similar Tools
 ========================================================
+incremental: true
 
 The Clustering Laboratory is similar to (and in fact was inspired by) an K-Means Lab presentented in the edX/MITx course 6.002x "Introduction to Computational Thinking and Data Science".  However, the Clustering Laboratory is superior to the edX K-Means Lab for the following reasons:
 
@@ -49,4 +50,5 @@ Summary
 
 - K-Means Clustering is an important tool in Data Science
 - The Clustering Laboratory is an effective tool for teaching K-Means Clustering
-- Head over to RPubs and check out the [Clustering Laboratory](http://example.com) today!
+- Head over to RPubs and check out the [http://camejia.shinyapps.io/clustering_lab](http://camejia.shinyapps.io/clustering_lab) today!
+- If you want to become part of the Clustering Laboratory Development Team, fork [https://github.com/camejia/clustering_lab](https://github.com/camejia/clustering_lab), make code contributions, and submit a pull request!
