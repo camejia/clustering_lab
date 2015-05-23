@@ -10,7 +10,7 @@ This project includes the following files:
 * clustering_lab.R - a R script used to test commands used in the above files (this file is not intended for external use but is included in the GitHub repository to capture development work)
 
 The Shiny App can be found here:
-[http://camejia.shinyapps.io/clustering_lab](http://camejia.shinyapps.io/clustering_lab)
+[https://camejia.shinyapps.io/clustering_lab](https://camejia.shinyapps.io/clustering_lab)
 
 The R Presentation can be found here:
 [http://rpubs.com/camejia/clustering_lab](http://rpubs.com/camejia/clustering_lab)
